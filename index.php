@@ -13,33 +13,47 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-    <?php /*
-    $CallAccountingList = simplexml_load_file("TicketCollector.xml") or die("Error: Cannot create object");
-    $i = 0;
-    foreach ($CallAccountingList->CallAccounting as $CallAccounting) {
-        if ($CallAccounting->Time == '14:32:00') {
-            $Data[$i] = $CallAccounting->CallDuration;
-
-            $i++;
-        }
-    }
-    $List = implode(', ', $Data);
-    echo $List;  */
-    ?> 
-
     <?php
     $CallAccountingList = simplexml_load_file("TicketCollector.xml") or die("Error: Cannot create object");
 
+    // Erstellen eines leeren Arrays für die Daten
+    $dataArray = [];
+
     foreach ($CallAccountingList->CallAccounting as $CallAccounting) {
+        $SubscriberName = (string) $CallAccounting->SubscriberName;
+        $DialledNumber = (string) $CallAccounting->DialledNumber;
+        $CallDuration = (string) $CallAccounting->CallDuration;
         $Date = (string) $CallAccounting->Date;
         $Time = (string) $CallAccounting->Time;
-        $CallDuration = (string) $CallAccounting->CallDuration;
-        $DialledNumber = (string) $CallAccounting->DialledNumber;
 
-        // Hier können Sie die gewünschten Daten weiterverarbeiten oder in Arrays speichern.
-    
-        echo "Date: $Date, Time: $Time, Call Duration: $CallDuration, Dialled Number: $DialledNumber<br>";
+        // Prüfen, ob Call Duration 00:00:00 ist
+        $Type = ($CallDuration == '00:00:00') ? 'missed' : 'incoming';
+
+        // Überprüfen, ob Subscriber Name leer ist
+        if (empty($SubscriberName)) {
+            $SubscriberName = 'none';
+        }
+
+        // Die Daten in ein assoziatives Array einfügen
+        $dataArray[] = [
+            'SubscriberName' => $SubscriberName,
+            'DialledNumber' => $DialledNumber,
+            'CallDuration' => $CallDuration,
+            'Date' => $Date,
+            'Time' => $Time,
+            'Type' => $Type,
+        ];
     }
+
+    // CSV-Datei erstellen und Daten schreiben
+    $csvFile = fopen("data.csv", "w");
+
+    foreach ($dataArray as $data) {
+        fputcsv($csvFile, $data);
+    }
+
+    fclose($csvFile);
+
     ?>
 
     <script> const data = "<?php echo $List; ?>";</script>
