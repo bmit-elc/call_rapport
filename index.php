@@ -5,10 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <?php
-    $url = "css/style.css";
-    echo "<link rel='stylesheet' href='{$url}'>";
-    ?>
+    <link  type="text/css" media="screen" rel='stylesheet' href="css/style.css">
     <script src="js/script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -17,14 +14,15 @@
 
 <body>
 
-    
-    <label for="date">Bitte selektieren Sie ein Datum:</label>
+   
+
+    <!-- <label for="date">Bitte selektieren Sie ein Datum:</label>
     <input type="date" placeholder="Datum" id="date" />
     <button id="getData">Daten holen</button>
 
     <div id="result">
         <canvas id="myChart"></canvas>
-    </div>
+    </div> -->
 
 </body>
 
