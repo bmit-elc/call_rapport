@@ -14,47 +14,74 @@
 
 
     <?php
-    $CallAccountingList = simplexml_load_file("TicketCollector.xml") or die("Error: Cannot create object");
+$servername = "localhost";
+$username = "root";
+$password = "";
 
-    // Erstellen eines leeren Arrays für die Daten
-    $dataArray = [];
+// Verbindung zur MySQL-Datenbank herstellen
+$conn = new mysqli($servername, $username, $password);
 
-    foreach ($CallAccountingList->CallAccounting as $CallAccounting) {
-        $SubscriberName = (string) $CallAccounting->SubscriberName;
-        $DialledNumber = (string) $CallAccounting->DialledNumber;
-        $CallDuration = (string) $CallAccounting->CallDuration;
-        $Date = (string) $CallAccounting->Date;
-        $Time = (string) $CallAccounting->Time;
+if ($conn->connect_error) {
+    die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
+}
 
-        // Prüfen, ob Call Duration 00:00:00 ist
-        $Type = ($CallDuration == '00:00:00') ? 'missed' : 'incoming';
+// Datenbank erstellen, wenn sie nicht existiert
+$createDatabaseSQL = "CREATE DATABASE IF NOT EXISTS call_report";
+if ($conn->query($createDatabaseSQL) === TRUE) {
+    echo "Datenbank 'call_report' wurde erstellt oder existiert bereits.<br>";
+} else {
+    echo "Fehler beim Erstellen der Datenbank: " . $conn->error;
+}
 
-        // Überprüfen, ob Subscriber Name leer ist
-        if (empty($SubscriberName)) {
-            $SubscriberName = 'none';
-        }
+// Datenbank auswählen
+$conn->select_db("call_report");
 
-        // Die Daten in ein assoziatives Array einfügen
-        $dataArray[] = [
-            'SubscriberName' => $SubscriberName,
-            'DialledNumber' => $DialledNumber,
-            'CallDuration' => $CallDuration,
-            'Date' => $Date,
-            'Time' => $Time,
-            'Type' => $Type,
-        ];
+// Tabelle erstellen, wenn sie nicht existiert
+$createTableSQL = "CREATE TABLE IF NOT EXISTS CallAccounting (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    SubscriberName VARCHAR(255),
+    DialledNumber VARCHAR(255),
+    Date DATE,
+    Time TIME,
+    CallDuration TIME,
+    Type VARCHAR(255)
+)";
+if ($conn->query($createTableSQL) === TRUE) {
+    echo "Tabelle 'CallAccounting' wurde erstellt oder existiert bereits.<br>";
+} else {
+    echo "Fehler beim Erstellen der Tabelle: " . $conn->error;
+}
+
+// CSV-Datei öffnen und Daten einlesen
+$csvFile = fopen("data.csv", "r");
+
+// Schleife durch die Zeilen der CSV-Datei
+while (($row = fgetcsv($csvFile)) !== false) {
+    // Erstelle den INSERT-Befehl
+    $SubscriberName = $conn->real_escape_string($row[0]);
+    $DialledNumber = $conn->real_escape_string($row[1]);
+    $CallDuration = $conn->real_escape_string($row[2]);
+    $Date = $conn->real_escape_string($row[3]);
+    $Time = $conn->real_escape_string($row[4]);
+    $Type = $conn->real_escape_string($row[5]);
+
+    $sql = "INSERT INTO CallAccounting (SubscriberName, DialledNumber, CallDuration, Date, Time, Type) VALUES ";
+    $sql .= "('$SubscriberName', '$DialledNumber', '$CallDuration', '$Date', '$Time', '$Type')";
+
+    // Führe den INSERT-Befehl aus
+    if ($conn->query($sql) === TRUE) {
+        echo "Datensatz hinzugefügt: $sql<br>";
+    } else {
+        echo "Fehler beim Hinzufügen des Datensatzes: " . $conn->error;
     }
+}
 
-    // CSV-Datei erstellen und Daten schreiben
-    $csvFile = fopen("data.csv", "w");
+// Schließe die CSV-Datei
+fclose($csvFile);
 
-    foreach ($dataArray as $data) {
-        fputcsv($csvFile, $data);
-    }
-
-    fclose($csvFile);
-
-    ?>
+// Schließe die Verbindung zur Datenbank
+$conn->close();
+?>
 
     <script> const data = "<?php echo $List; ?>";</script>
 </head>
