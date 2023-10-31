@@ -9,20 +9,19 @@
     <script src="js/script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+
     <script> const data = "<?php echo $List; ?>";</script>
 </head>
 
 <body>
 
-   
+    <header>
+        <span>
+            <img src="espas_logo_notext.svg" alt="espas logo" id="espas_logo">
+        </span>
+    </header>
+    
 
-    <!-- <label for="date">Bitte selektieren Sie ein Datum:</label>
-    <input type="date" placeholder="Datum" id="date" />
-    <button id="getData">Daten holen</button>
-
-    <div id="result">
-        <canvas id="myChart"></canvas>
-    </div> -->
 
 </body>
 
