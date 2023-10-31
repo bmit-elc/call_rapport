@@ -28,7 +28,7 @@ if ($conn->connect_error) {
 // Datenbank erstellen, wenn sie nicht existiert
 $createDatabaseSQL = "CREATE DATABASE IF NOT EXISTS call_report";
 if ($conn->query($createDatabaseSQL) === TRUE) {
-    echo "Datenbank 'call_report' wurde erstellt oder existiert bereits.<br>";
+    echo "<!--Datenbank 'call_report' wurde erstellt oder existiert bereits.<br>-->";
 } else {
     echo "Fehler beim Erstellen der Datenbank: " . $conn->error;
 }
@@ -47,7 +47,7 @@ $createTableSQL = "CREATE TABLE IF NOT EXISTS CallAccounting (
     Type VARCHAR(255)
 )";
 if ($conn->query($createTableSQL) === TRUE) {
-    echo "Tabelle 'CallAccounting' wurde erstellt oder existiert bereits.<br>";
+    echo "<!--Tabelle 'CallAccounting' wurde erstellt oder existiert bereits.<br>-->";
 } else {
     echo "Fehler beim Erstellen der Tabelle: " . $conn->error;
 }
@@ -70,7 +70,7 @@ while (($row = fgetcsv($csvFile)) !== false) {
 
     // Führe den INSERT-Befehl aus
     if ($conn->query($sql) === TRUE) {
-        echo "Datensatz hinzugefügt: $sql<br>";
+        echo "<!--Datensatz hinzugefügt: $sql<br>-->";
     } else {
         echo "Fehler beim Hinzufügen des Datensatzes: " . $conn->error;
     }
@@ -87,14 +87,12 @@ $conn->close();
 </head>
 
 <body>
-
-    <label for="date">Bitte selektieren Sie ein Datum:</label>
-    <input type="date" placeholder="Datum" id="date" />
-    <button id="getData">Daten holen</button>
-
-    <div id="result">
-        <canvas id="myChart"></canvas>
-    </div>
+    <header>
+        <span>
+            <img src="espas_logo_notext.svg" alt="espas logo" id="espas_logo">
+        </span>
+    </header>
+    
 
 </body>
 
