@@ -1,3 +1,4 @@
+SubscriberName,DialledNumber,CallDuration,Date,Time,Type
 "Quadient franz.",0244826010,00:00:39,2023-07-18,14:32:00,incoming
 Service21,0276061731,00:04:55,2023-07-18,14:29:00,incoming
 "Zentrale Servi21",0448016688,00:02:15,2023-07-18,14:34:00,incoming
