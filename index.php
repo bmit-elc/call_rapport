@@ -32,7 +32,7 @@
         $CommunicationType = (string) $CallAccounting->CommunicationType;
 
         // Prüfen, ob Call Duration 00:00:00 ist
-        $Type = ($CallDuration == '00:00:00') ? 'missed' : 'catched';
+        $Type = ($CallDuration == '00:00:00') ? 'missed' : 'caught';
 
         // Bestimme den CallType basierend auf der CommunicationType
         if (in_array($CommunicationType, ['IncomingPrivate', 'IncomingTransit', 'IncomingTransferPrivate', 'IncomingTransferTransit'])) {
