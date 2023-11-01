@@ -27,6 +27,13 @@
 
     <main>
         <!--Container für die Labels der Daten und der Liste-->
+
+        <div class="nav-buttons">
+            <button class="buttons" id="button1">Button 1</button>
+            <button class="buttons" id="button2">Button 2</button>
+            <button class="buttons" id="button3">Button 3</button>
+        </div>
+
         <div class="infinite_scrolling_list_container">
             <div class="infinite_scrolling_list">
                 <ul>
@@ -52,7 +59,7 @@
                     <li>item</li>
                 </ul>
             </div>
-        </div> 
+        </div>
     </main>
 
 </body>
