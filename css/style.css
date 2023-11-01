@@ -1,12 +1,10 @@
-
 @font-face {
     font-family: 'frutiger', Arial, Helvetica, sans-serif;
     src: url('fonts/frutiger');
 }
 
 body {
-    background-color: rgb(139, 138, 136);
-
+    background-color: #F5F5F5;
     margin: 0;
     font-family: 'frutiger', Arial, Helvetica, sans-serif;
 }
@@ -16,22 +14,16 @@ body {
     height: 5rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;   
-  }
+    justify-content: space-between;
+    font-size: 1.2rem;
+}
 
-.espas_logo{
+.espas_logo {
     width: 10rem;
     margin: 2rem 0 1rem 1rem;
 }
-.infinite_scrolling_list_container{
-    height:200px;
-    overflow: auto;
-    width: 1000px;
-    position: absolute;
-    left: 20vw;
-}
 
-.currentDate{
+.currentDate {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
@@ -40,3 +32,25 @@ body {
     font-weight: bold;
 }
 
+.nav-buttons {
+    margin: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.buttons{
+    background-color: #9AB1EC;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    border: none;
+    box-shadow: none;
+}
+
+
+.infinite_scrolling_list_container {
+    height: 20vw;
+    overflow: auto;
+    width: 45vw;
+    left: 20vw;
+    position: absolute;
+}
