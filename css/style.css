@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #F5F5F5;
+    background-color: #F5F5F5 !important;
     margin: 0;
     font-family: 'frutiger', Arial, Helvetica, sans-serif !important;
 }
@@ -46,11 +46,19 @@ body {
 
 }
 
+.content{
+    display: flex;
+    flex-direction: column;
+}
+
+.scrolling-list{
+    display: flex;
+    justify-content: space-evenly;
+}
 
 .infinite_scrolling_list_container {
-    height: 20vw;
+    height: 25vw;
     overflow: auto;
-    width: 45vw;
-    left: 20vw;
     position: absolute;
+    background-color: #E1E8F3;
 }

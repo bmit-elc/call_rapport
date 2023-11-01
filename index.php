@@ -11,14 +11,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
 
-
-    <script> const data = "<?php echo $List; ?>";</script>
 </head>
 
 <body>
@@ -34,73 +32,104 @@
     </header>
 
     <main>
-        <div class="nav-buttons">
-
-            <select class="buttons btn-lg dropdown-toggle" id="inputGroupSelect02" id="customerButton" type="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <option selected>Select Customer</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-
-            <button class="buttons btn-lg" id="startButton">Select starting Date</button>
-            <button class="buttons btn-lg" id="endButton">Select end Date</button>
-        </div>
-
-
         <?php
-
-        // Daten für die infinite_scroll Liste auslesen
+        // Verbindung zur MySQL-Datenbank herstellen
         $servername = "localhost";
         $username = "root";
         $password = "";
         $dbname = "call_report";
 
-        // Verbindung zur MySQL-Datenbank herstellen
         $conn = new mysqli($servername, $username, $password, $dbname);
 
-        // SQL Query
-        $sql = "SELECT SubscriberName, DialledNumber, CallDuration, Time, Date, CallType, Type FROM callaccounting";
+        // Überprüfen, ob die Verbindung erfolgreich hergestellt wurde
+        if ($conn->connect_error) {
+            die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
+        }
+
+        // SQL-Abfrage, um alle eindeutigen SubscriberName-Werte abzurufen
+        $sql = "SELECT DISTINCT SubscriberName FROM callaccounting WHERE SubscriberName != 'SubscriberName'";
         $result = $conn->query($sql);
 
-        // HTML für eine scrolling list
-        echo '<div class="infinite_scrolling_list_container">';
-        echo '<table class="table">';
-        echo '<thead>';
-        echo '<tr>';
-        echo '<th scope="col">Name</th>';
-        echo '<th scope="col">Nummer</th>';
-        echo '<th scope="col">Datum</th>';
-        echo '<th scope="col">Uhrzeit</th>';
-        echo '<th scope="col">Aus/Eingehende Anrufe</th>';
-        echo '<th scope="col">Anruflänge</th>';
-        echo '<th scope="col">Angenommen/verpasst</th>';
-        echo '</tr>';  
-        echo '</thead>';
-        echo '<tbody">';
-
-        if (mysqli_num_rows($result) > 0) {
-            // output der query
-
-            while($row = mysqli_fetch_assoc($result)) {
-            echo '<tr>'. '<td>'. $row["SubscriberName"]. "</td>". '<td>'. $row["DialledNumber"]. "</td>". '<td>'. $row["CallDuration"]. "</td>".'<td>'. $row["Time"]. "</td>". '<td>'. $row["Date"]. "</td>". '<td>'. $row["CallType"]. "</td>". '<td>'. $row["Type"]. '</td>'. "</tr>";
-
+        // HTML-Optionen für den Select-Button erstellen
+        $selectOptions = "";
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $subscriberName = $row["SubscriberName"];
+                $selectOptions .= "<option value='$subscriberName'>$subscriberName</option>";
             }
-        } else {
-            echo "0 results";
         }
-        
-        echo '</tbody>';
-        echo '</table>';
-        echo '</div>';
-        
 
+        // Verbindung zur Datenbank schließen
         $conn->close();
         ?>
-        
-        <?php include("xml.php"); ?>
 
+        <div class="content">
+            <div class="nav-buttons">
+                <select class="buttons btn-lg custom-select" id="customerButton" type="button" aria-haspopup="true"
+                    aria-expanded="false">
+                    <option selected>Select Customer</option>
+                    <?php echo $selectOptions; // Die Optionen aus der Datenbank einfügen ?>
+                </select>
+                <button class="buttons btn-lg" id="startButton">Select starting Date</button>
+                <button class="buttons btn-lg" id="endButton">Select end Date</button>
+            </div>
+
+
+            <?php
+
+            // Daten für die infinite_scroll Liste auslesen
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "call_report";
+
+            // Verbindung zur MySQL-Datenbank herstellen
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            // SQL Query
+            $sql = "SELECT SubscriberName, DialledNumber, RingingDuration, CallDuration, Time, Date, CallType, Type FROM callaccounting WHERE SubscriberName != 'SubscriberName'";
+            $result = $conn->query($sql);
+
+            // HTML für eine scrolling list
+            echo '<div class="scrolling-list">';
+            echo '<div class="infinite_scrolling_list_container">';
+            echo '<table class="table">';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th scope="col">Name</th>';
+            echo '<th scope="col">Nummer</th>';
+            echo '<th scope="col">Anrufdauer</th>';
+            echo '<th scope="col">Klingeldauer</th>';
+            echo '<th scope="col">Uhrzeit</th>';
+            echo '<th scope="col">Datum</th>';
+            echo '<th scope="col">Anruf</th>';
+            echo '<th scope="col">Typ</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody">';
+
+            if (mysqli_num_rows($result) > 0) {
+                // output der query
+            
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<tr>' . '<td>' . $row["SubscriberName"] . "</td>" . '<td>' . $row["DialledNumber"] . "</td>" . '<td>' . $row["CallDuration"] .'<td>' . $row["RingingDuration"] . "</td>" . '<td>' . $row["Time"] . "</td>" . '<td>' . $row["Date"] . "</td>" . '<td>' . $row["CallType"] . "</td>" . '<td>' . $row["Type"] . '</td>' . "</tr>";
+
+                }
+            } else {
+                echo "0 results";
+            }
+
+            echo '</tbody>';
+            echo '</table>';
+            echo '</div>';
+            echo '</div>';
+
+
+            $conn->close();
+            ?>
+
+            <?php include("xml.php"); ?>
+        </div>
         <!--Container für die Labels der Daten und der Liste
 
         <div class="infinite_scrolling_list_container">
