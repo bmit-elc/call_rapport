@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 // Datenbank erstellen, wenn sie nicht existiert
 $createDatabaseSQL = "CREATE DATABASE IF NOT EXISTS call_report";
 if ($conn->query($createDatabaseSQL) === TRUE) {
-    echo "Datenbank 'call_report' wurde erstellt oder existiert bereits.<br>";
+    // echo "Datenbank 'call_report' wurde erstellt oder existiert bereits.<br>";
 } else {
     echo "Fehler beim Erstellen der Datenbank: " . $conn->error;
 }
@@ -24,7 +24,7 @@ $conn->select_db("call_report");
 // Tabelle erstellen, wenn sie nicht existiert
 $dropTableSQL = "DROP TABLE IF EXISTS CallAccounting";
 if ($conn->query($dropTableSQL) === TRUE) {
-    echo "Tabelle 'CallAccounting' wurde gelöscht oder existiert nicht.<br>";
+    // echo "Tabelle 'CallAccounting' wurde gelöscht oder existiert nicht.<br>";
 } else {
     echo "Fehler beim Löschen der Tabelle: " . $conn->error;
 }
@@ -42,7 +42,7 @@ $createTableSQL = "CREATE TABLE IF NOT EXISTS CallAccounting (
 )";
 
 if ($conn->query($createTableSQL) === TRUE) {
-    echo "Tabelle 'CallAccounting' wurde erstellt oder existiert bereits.<br>";
+    // echo "Tabelle 'CallAccounting' wurde erstellt oder existiert bereits.<br>";
 } else {
     echo "Fehler beim Erstellen der Tabelle: " . $conn->error;
 }
@@ -67,7 +67,7 @@ while (($row = fgetcsv($csvFile)) !== false) {
 
     // Führe den INSERT-Befehl aus
     if ($conn->query($sql) === TRUE) {
-        echo "Datensatz hinzugefügt: $sql<br>";
+        // echo "Datensatz hinzugefügt: $sql<br>";
     } else {
         echo "Fehler beim Hinzufügen des Datensatzes: " . $conn->error;
     }
