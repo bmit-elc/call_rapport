@@ -1,27 +1,33 @@
- hae_design
-body, html{
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    height: 10rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgb(0, 140, 255);
-    width: 100%;
-    
-  }
-.espas_logo{
-    width: 50px;
-    
-
+@font-face {
+    font-family: 'frutiger', Arial, Helvetica, sans-serif;
+    src: url('fonts/frutiger');
 }
 
 body {
     background-color: rgb(139, 138, 136);
+    margin: 0;
+    font-family: 'frutiger', Arial, Helvetica, sans-serif;
 }
- main
+
+.navbar {
+    background-color: #9AB1EC;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;   
+
+  }
+
+.espas_logo{
+    width: 10rem;
+    margin: 2rem 0 1rem 1rem;
+}
+
+.currentDate{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 1rem 0rem 0rem;
+    font-weight: bold;
+}

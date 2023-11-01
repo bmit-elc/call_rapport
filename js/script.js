@@ -13,6 +13,32 @@ function myFunction(xml) {
     xmlDoc.getElementsByTagName("TicketType")[0];
 } */
 
+/*Current date*/
+function updateDateTime() {
+  const todayDateElement = document.querySelector('.todayDate');
+  const timeNowElement = document.querySelector('.timeNow');
+
+  const now = new Date();
+  const optionsDate = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+
+  const formattedDate = now.toLocaleDateString('de-DE', optionsDate);
+  const formattedTime = now.toLocaleTimeString('de-DE', optionsTime);
+
+  todayDateElement.textContent = formattedDate;
+  timeNowElement.textContent = formattedTime;
+}
+
+// Aktualisiere das Datum und die Uhrzeit alle Sekunde
+setInterval(updateDateTime, 1000);
+
+// Initial das Datum und die Uhrzeit anzeigen
+updateDateTime();
+
+
+
+
+
 function searchXML(){
     xmlDoc = loadXMLDoc("TicketCollector.xml");
     x = xmlDoc.getElementsByTagName("DialledNumber");
