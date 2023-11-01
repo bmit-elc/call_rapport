@@ -61,7 +61,7 @@
         $conn = new mysqli($servername, $username, $password, $dbname);
 
         // SQL Query
-        $sql = "SELECT SubscriberName, DialledNumber, CallDuration, Time, Date, CallType, Type FROM callaccounting";
+        $sql = "SELECT SubscriberName, DialledNumber, CallDuration, Time, Date, CallType, RingingDuration, Type FROM callaccounting";
         $result = $conn->query($sql);
 
         // HTML für eine scrolling list
@@ -75,6 +75,7 @@
         echo '<th scope="col">Uhrzeit</th>';
         echo '<th scope="col">Aus/Eingehende Anrufe</th>';
         echo '<th scope="col">Anruflänge</th>';
+        echo '<th scope="col">Klingeldauer</th>';
         echo '<th scope="col">Angenommen/verpasst</th>';
         echo '</tr>';  
         echo '</thead>';
@@ -84,7 +85,7 @@
             // output der query
 
             while($row = mysqli_fetch_assoc($result)) {
-            echo '<tr>'. '<td>'. $row["SubscriberName"]. "</td>". '<td>'. $row["DialledNumber"]. "</td>". '<td>'. $row["CallDuration"]. "</td>".'<td>'. $row["Time"]. "</td>". '<td>'. $row["Date"]. "</td>". '<td>'. $row["CallType"]. "</td>". '<td>'. $row["Type"]. '</td>'. "</tr>";
+            echo '<tr>'. '<td>'. $row["SubscriberName"]. "</td>". '<td>'. $row["DialledNumber"]. "</td>". '<td>'. $row["Date"]. "</td>". '<td>'. $row["Time"]. "</td>". '<td>'. $row["CallType"]. "</td>". '<td>'. $row["CallDuration"]. "</td>". '<td>'. $row["RingingDuration"]. '</td>'. '<td>'. $row["Type"]. '</td>'. "</tr>";
 
             }
         } else {
