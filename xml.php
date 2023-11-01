@@ -16,13 +16,13 @@
         $CommunicationType = (string) $CallAccounting->CommunicationType;
 
         // Prüfen, ob Call Duration 00:00:00 ist
-        $Type = ($CallDuration == '00:00:00') ? 'missed' : 'caught';
+        $Type = ($CallDuration == '00:00:00') ? 'missed' : 'angenommen';
 
         // Bestimme den CallType basierend auf der CommunicationType
         if (in_array($CommunicationType, ['IncomingPrivate', 'IncomingTransit', 'IncomingTransferPrivate', 'IncomingTransferTransit'])) {
-            $calltype = 'incoming';
+            $calltype = 'eingehende';
         } elseif (in_array($CommunicationType, ['OutgoingPrivate', 'OutgoingTransferTransit', 'OutgoingTransferPrivate', 'OutgoingTransit'])) {
-            $calltype = 'outgoing';
+            $calltype = 'ausgehende';
         } elseif ($CommunicationType == 'BreakIn') {
             $calltype = 'breakIn';
         } elseif ($CommunicationType == 'FacilityRequest') {
@@ -56,3 +56,5 @@
     // CSV-Datei schließen
     fclose($csvFile);
     ?>
+
+    <?php include("database.php"); ?>
