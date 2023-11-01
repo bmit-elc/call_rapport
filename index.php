@@ -22,11 +22,38 @@
                 <div class="todayDate"></div>
                 <div class="timeNow"></div>
             </div>
-
         </nav>
     </header>
 
-
+    <main>
+        <!--Container für die Labels der Daten und der Liste-->
+        <div class="infinite_scrolling_list_container">
+            <div class="infinite_scrolling_list">
+                <ul>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                </ul>
+            </div>
+        </div> 
+    </main>
 
 </body>
 

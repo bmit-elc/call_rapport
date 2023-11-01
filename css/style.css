@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: 'frutiger', Arial, Helvetica, sans-serif;
     src: url('fonts/frutiger');
@@ -5,6 +6,7 @@
 
 body {
     background-color: rgb(139, 138, 136);
+
     margin: 0;
     font-family: 'frutiger', Arial, Helvetica, sans-serif;
 }
@@ -15,12 +17,18 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;   
-
   }
 
 .espas_logo{
     width: 10rem;
     margin: 2rem 0 1rem 1rem;
+}
+.infinite_scrolling_list_container{
+    height:200px;
+    overflow: auto;
+    width: 1000px;
+    position: absolute;
+    left: 20vw;
 }
 
 .currentDate{
@@ -31,3 +39,4 @@ body {
     margin: 0 1rem 0rem 0rem;
     font-weight: bold;
 }
+
