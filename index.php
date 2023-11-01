@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link  type="text/css" media="screen" rel='stylesheet' href="css/style.css">
+    <link type="text/css" media="screen" rel='stylesheet' href="css/style.css">
     <script src="js/script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -16,10 +16,15 @@
 <body>
 
     <header>
-        <nav>
-            <img src="img/espas-logo.svg" alt="espas logo" id="espas_logo">
-    </nav>
+        <nav class="navbar">
+            <img src="img/espas_logo.svg" alt="espas logo" class="espas_logo">
+            <div class="currentDate">
+                <div class="todayDate"></div>
+                <div class="timeNow"></div>
+            </div>
+        </nav>
     </header>
+
     <main>
         <!--Container für die Labels der Daten und der Liste-->
         <div class="infinite_scrolling_list_container">
@@ -49,7 +54,6 @@
             </div>
         </div> 
     </main>
-
 
 </body>
 

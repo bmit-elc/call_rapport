@@ -1,24 +1,27 @@
 
-body, html{
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+@font-face {
+    font-family: 'frutiger', Arial, Helvetica, sans-serif;
+    src: url('fonts/frutiger');
 }
 
-header {
-    height: 10rem;
+body {
+    background-color: rgb(139, 138, 136);
+
+    margin: 0;
+    font-family: 'frutiger', Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+    background-color: #9AB1EC;
+    height: 5rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background-color: rgb(38, 79, 113);
-    width: 100%;
-    
+    justify-content: space-between;   
   }
-.espas_logo{
-    width: 50px;
-    
 
+.espas_logo{
+    width: 10rem;
+    margin: 2rem 0 1rem 1rem;
 }
 .infinite_scrolling_list_container{
     height:200px;
@@ -28,7 +31,12 @@ header {
     left: 20vw;
 }
 
-body {
-    background-color: rgb(103, 61, 61);
+.currentDate{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 1rem 0rem 0rem;
+    font-weight: bold;
 }
 
