@@ -17,10 +17,38 @@
 
     <header>
         <span>
-            <img src="espas_logo_notext.svg" alt="espas logo" id="espas_logo">
+            <img src="img/espas-logo.svg" alt="espas logo" id="espas_logo">
         </span>
     </header>
-    
+    <main>
+        <!--Container für die Labels der Daten und der Liste-->
+        <div class="infinite_scrolling_list_container">
+            <div class="infinite_scrolling_list">
+                <ul>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                </ul>
+            </div>
+        </div> 
+    </main>
 
 
 </body>

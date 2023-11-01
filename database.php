@@ -79,3 +79,18 @@ fclose($csvFile);
 // Schließe die Verbindung zur Datenbank
 $conn->close();
 ?>
+<?php
+// Daten für die infinite_scroll Liste auslesen
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "call_report";
+
+// Verbindung zur MySQL-Datenbank herstellen
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// SQL Query
+$sql = "SELECT DialledNumber, CallDuration, Time, Date, Type FROM callaccounting";
+$result = $conn->query($sql);
+$conn->close();
+?>
