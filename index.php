@@ -16,9 +16,9 @@
 <body>
 
     <header>
-        <span>
+        <nav>
             <img src="img/espas-logo.svg" alt="espas logo" id="espas_logo">
-        </span>
+    </nav>
     </header>
     <main>
         <!--Container für die Labels der Daten und der Liste-->
