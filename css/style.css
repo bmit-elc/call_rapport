@@ -6,17 +6,16 @@
 body {
     background-color: #F5F5F5;
     margin: 0;
-    font-family: 'frutiger', Arial, Helvetica, sans-serif;
+    font-family: 'frutiger', Arial, Helvetica, sans-serif !important;
 }
 
 .navbar {
     background-color: #9AB1EC;
     height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     font-size: 1.2rem;
+    align-content: space-around;
 }
+
 
 .espas_logo {
     width: 10rem;
@@ -41,9 +40,10 @@ body {
 
 .buttons{
     background-color: #9AB1EC;
-    padding: 0.5rem 2rem 0.5rem 2rem;
     border: none;
     box-shadow: none;
+    padding: 0.5rem 3rem !important;
+
 }
 
 
