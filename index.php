@@ -26,7 +26,42 @@
     </header>
 
     <main>
-        <!--Container für die Labels der Daten und der Liste-->
+        <?php
+
+        // Daten für die infinite_scroll Liste auslesen
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "call_report";
+
+        // Verbindung zur MySQL-Datenbank herstellen
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // SQL Query
+        $sql = "SELECT DialledNumber, CallDuration, Time, Date, Type FROM callaccounting";
+        $result = $conn->query($sql);
+
+        // HTML für eine scrolling list
+        echo '<div class="infinite_scrolling_list_container">';
+        echo '<div class="infinite_scrolling_list">';
+        echo '<ul>';
+
+        if (mysqli_num_rows($result) > 0) {
+            // output der query
+            while($row = mysqli_fetch_assoc($result)) {
+            echo '<li>'. $row["DialledNumber"]. "  ". $row["CallDuration"]. "  ". $row["Time"]. "  ". $row["Date"]. "  ". $row["Type"]. "</li>";
+            }
+        } else {
+            echo "0 results";
+        }
+
+        echo '</ul>';
+        echo '</div>';
+        echo '</div>';
+
+        $conn->close();
+        ?>
+        <!--Container für die Labels der Daten und der Liste
         <div class="infinite_scrolling_list_container">
             <div class="infinite_scrolling_list">
                 <ul>
@@ -52,7 +87,7 @@
                     <li>item</li>
                 </ul>
             </div>
-        </div> 
+        </div> -->
     </main>
 
 </body>

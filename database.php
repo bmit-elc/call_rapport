@@ -92,5 +92,22 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // SQL Query
 $sql = "SELECT DialledNumber, CallDuration, Time, Date, Type FROM callaccounting";
 $result = $conn->query($sql);
+
+// HTML für eine scrolling list
+echo '<div class="infinite_scrolling_list">';
+echo '<ul>';
+
+if (mysqli_num_rows($result) > 0) {
+    // output der query
+    while($row = mysqli_fetch_assoc($result)) {
+      echo '<li>'. $row["DialledNumber"]. "  ". $row["CallDuration"]. "  ". $row["Time"]. "  ". $row["Date"]. "  ". $row["Type"]. "</li>";
+    }
+  } else {
+    echo "0 results";
+  }
+
+  echo '</ul>';
+  echo '</div>';
+
 $conn->close();
 ?>
