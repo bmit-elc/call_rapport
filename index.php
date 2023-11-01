@@ -87,7 +87,7 @@
             $conn = new mysqli($servername, $username, $password, $dbname);
 
             // SQL Query
-            $sql = "SELECT SubscriberName, DialledNumber, RingingDuration, CallDuration, Time, Date, CallType, Type FROM callaccounting WHERE SubscriberName != 'SubscriberName'";
+            $sql = "SELECT SubscriberName, DialledNumber, RingingDuration, CallDuration, Time, Date, CallType, Type FROM callaccounting WHERE SubscriberName != 'SubscriberName' ORDER BY Date DESC, Time DESC";
             $result = $conn->query($sql);
 
             // HTML für eine scrolling list
