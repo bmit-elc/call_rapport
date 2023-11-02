@@ -31,7 +31,9 @@
         </nav>
     </header>
 
-    <main>
+    <main> 
+        <?php include("xml.php"); ?>
+        
         <?php
         // Verbindung zur MySQL-Datenbank herstellen
         $servername = "localhost";
@@ -125,10 +127,7 @@
             // Verbindung zur Datenbacnk schliessen
             $conn->close();
             ?>
-
-            <?php 
-            // Aktualisierung der Daten
-            include("xml.php"); ?>
+          
         </div>
     </main>
 </body>

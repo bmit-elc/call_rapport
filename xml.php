@@ -7,10 +7,10 @@
     foreach ($CallAccountingList->CallAccounting as $CallAccounting) {
         $SubscriberName = (string) $CallAccounting->SubscriberName;
         $DialledNumber = (string) $CallAccounting->DialledNumber;
-        $RingingDuration = (string) $CallAccounting->RingingDuration;
-        $CallDuration = (string) $CallAccounting->CallDuration;
         $Date = (string) $CallAccounting->Date;
         $Time = (string) $CallAccounting->Time;
+        $RingingDuration = (string) $CallAccounting->RingingDuration;
+        $CallDuration = (string) $CallAccounting->CallDuration;
 
         // Prüfen ob incoming oder outgoing
         $CommunicationType = (string) $CallAccounting->CommunicationType;
@@ -35,10 +35,10 @@
         $newDataArray[] = [
             'SubscriberName' => $SubscriberName,
             'DialledNumber' => $DialledNumber,
-            'RingingDuration' => $RingingDuration,
-            'CallDuration' => $CallDuration,
             'Date' => $Date,
             'Time' => $Time,
+            'RingingDuration' => $RingingDuration,
+            'CallDuration' => $CallDuration,
             'Type' => $Type,
             'CallType' => $calltype,
         ];
