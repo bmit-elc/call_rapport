@@ -55,15 +55,15 @@ while (($row = fgetcsv($csvFile)) !== false) {
     // Erstelle den INSERT-Befehl
     $SubscriberName = $conn->real_escape_string($row[0]);
     $DialledNumber = $conn->real_escape_string($row[1]);
-    $CallDuration = $conn->real_escape_string($row[2]);
-    $RingingDuration = $conn->real_escape_string($row[3]);
-    $Date = $conn->real_escape_string($row[4]);
-    $Time = $conn->real_escape_string($row[5]);
+    $Date = $conn->real_escape_string($row[2]);
+    $Time = $conn->real_escape_string($row[3]);
+    $RingingDuration = $conn->real_escape_string($row[4]);
+    $CallDuration = $conn->real_escape_string($row[5]);
     $Type = $conn->real_escape_string($row[6]);
     $Calltype = $conn->real_escape_string($row[7]);
 
-    $sql = "INSERT INTO CallAccounting (SubscriberName, DialledNumber, RingingDuration, CallDuration, Date, Time, Type, CallType) VALUES ";
-    $sql .= "('$SubscriberName', '$DialledNumber', '$RingingDuration', '$CallDuration', '$Date', '$Time', '$Type', '$Calltype')";
+    $sql = "INSERT INTO CallAccounting (SubscriberName, DialledNumber, Date, Time, RingingDuration, CallDuration, Type, CallType) VALUES ";
+    $sql .= "('$SubscriberName', '$DialledNumber', '$Date', '$Time', '$RingingDuration', '$CallDuration', '$Type', '$Calltype')";
 
     // Führe den INSERT-Befehl aus
     if ($conn->query($sql) === TRUE) {

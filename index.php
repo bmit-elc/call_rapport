@@ -31,7 +31,9 @@
         </nav>
     </header>
 
-    <main>
+    <main> 
+        <?php include("xml.php"); ?>
+        
         <?php
         // Verbindung zur MySQL-Datenbank herstellen
         $servername = "localhost";
@@ -128,7 +130,7 @@
             $conn->close();
             ?>
 
-            <?php include("xml.php"); ?>
+           
         </div>
         <!--Container für die Labels der Daten und der Liste
 
