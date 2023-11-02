@@ -20,9 +20,9 @@
 
         // Bestimme den CallType basierend auf der CommunicationType
         if (in_array($CommunicationType, ['IncomingPrivate', 'IncomingTransit', 'IncomingTransferPrivate', 'IncomingTransferTransit'])) {
-            $calltype = 'eingehende';
+            $calltype = 'eingehend';
         } elseif (in_array($CommunicationType, ['OutgoingPrivate', 'OutgoingTransferTransit', 'OutgoingTransferPrivate', 'OutgoingTransit'])) {
-            $calltype = 'ausgehende';
+            $calltype = 'ausgehend';
         } elseif ($CommunicationType == 'BreakIn') {
             $calltype = 'breakIn';
         } elseif ($CommunicationType == 'FacilityRequest') {
