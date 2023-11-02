@@ -4,13 +4,13 @@
 }
 
 body {
-    background-color: #F5F5F5 !important;
+    background-color: #ffff !important;
     margin: 0;
     font-family: 'frutiger', Arial, Helvetica, sans-serif !important;
 }
 
 .navbar {
-    background-color: #9AB1EC;
+    background-color: #eb9646;
     height: 5rem;
     font-size: 1.2rem;
     align-content: space-around;
@@ -39,7 +39,7 @@ body {
 }
 
 .buttons{
-    background-color: #9AB1EC;
+    background-color: #8caadc;
     border: none;
     box-shadow: none;
     padding: 0.5rem 3rem !important;
@@ -60,5 +60,7 @@ body {
     height: 25vw;
     overflow: auto;
     position: absolute;
-    background-color: #E1E8F3;
+    background-color: #F3F1F1;
+
+    ;
 }
