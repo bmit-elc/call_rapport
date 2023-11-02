@@ -1,6 +1,7 @@
 # call_report
 
-![image](https://github.com/bmit-elc/call_report/assets/113030969/d44753fd-938e-4ffb-83fa-c7e6d01cadb3)
+![image](https://github.com/bmit-elc/call_report/assets/113030969/61b01a3f-f671-4c4a-99f7-9a0f11780dc8)
+
 
 
 - "Call Report" zielt darauf die Erreichbarkeit des Unternehmens und die Qualität des ESPAS Telefonservices zu optimieren.
