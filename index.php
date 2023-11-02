@@ -90,7 +90,7 @@
             $sql = "SELECT SubscriberName, DialledNumber, RingingDuration, CallDuration, Time, Date, CallType, Type FROM callaccounting WHERE SubscriberName != 'SubscriberName' ORDER BY Date DESC, Time DESC";
             $result = $conn->query($sql);
 
-            // HTML für eine scrolling list
+            // HTML für eine scrolling Tabelle
             echo '<div class="scrolling-list">';
             echo '<div class="infinite_scrolling_list_container">';
             echo '<table class="table">';
@@ -109,11 +109,9 @@
             echo '<tbody">';
 
             if (mysqli_num_rows($result) > 0) {
-                // output der query
-            
+                // Output der query
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '<tr>' . '<td>' . $row["SubscriberName"] . "</td>" . '<td>' . $row["DialledNumber"] . "</td>" . '<td>' . $row["CallDuration"] .'<td>' . $row["RingingDuration"] . "</td>" . '<td>' . $row["Time"] . "</td>" . '<td>' . $row["Date"] . "</td>" . '<td>' . $row["CallType"] . "</td>" . '<td>' . $row["Type"] . '</td>' . "</tr>";
-
                 }
             } else {
                 echo "0 results";
@@ -124,44 +122,14 @@
             echo '</div>';
             echo '</div>';
 
-
+            // Verbindung zur Datenbacnk schliessen
             $conn->close();
             ?>
 
-            <?php include("xml.php"); ?>
+            <?php 
+            // Aktualisierung der Daten
+            include("xml.php"); ?>
         </div>
-        <!--Container für die Labels der Daten und der Liste
-
-        <div class="infinite_scrolling_list_container">
-            <div class="infinite_scrolling_list">
-                <ul>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                </ul>
-            </div>
-
-        </div> -->
-
     </main>
-
 </body>
-
 </html>
