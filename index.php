@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Call Report</title>
+    <title>Call Report - ESPAS</title>
     <link type="text/css" media="screen" rel='stylesheet' href="css/style.css">
     <script src="js/script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -16,25 +16,37 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
-
+    <link href="img/favicon-32x32.png" rel="icon">
 </head>
 
 <body>
 
     <header>
         <nav class="navbar">
+            <img src="img/header-bg.svg" alt="Header Background" class="header-bg">
             <img src="img/espas_logo.svg" alt="espas logo" class="espas_logo">
             <div class="currentDate">
                 <div class="todayDate"></div>
                 <div class="timeNow"></div>
             </div>
         </nav>
+        
+        <div class="nav-buttons">
+                <select class="buttons btn-lg custom-select" id="customerButton" type="button" aria-haspopup="true"
+                    aria-expanded="false">
+                    <option selected>Select Customer</option>
+                    <?php echo $selectOptions; // Die Optionen aus der Datenbank einfügen ?>
+                </select>
+                <button class="buttons btn-lg" id="startButton">Select starting Date</button>
+                <button class="buttons btn-lg" id="endButton">Select end Date</button>
+            </div>
+
     </header>
 
-    <main> 
-        <?php include("xml.php"); ?>
-        
-        <?php
+    <main>
+       <?php //include("xml.php"); ?>
+
+        <?php /*
         // Verbindung zur MySQL-Datenbank herstellen
         $servername = "localhost";
         $username = "root";
@@ -62,20 +74,11 @@
         }
 
         // Verbindung zur Datenbank schließen
-        $conn->close();
+        $conn->close(); */
         ?>
 
         <div class="content">
-            <div class="nav-buttons">
-                <select class="buttons btn-lg custom-select" id="customerButton" type="button" aria-haspopup="true"
-                    aria-expanded="false">
-                    <option selected>Select Customer</option>
-                    <?php echo $selectOptions; // Die Optionen aus der Datenbank einfügen ?>
-                </select>
-                <button class="buttons btn-lg" id="startButton">Select starting Date</button>
-                <button class="buttons btn-lg" id="endButton">Select end Date</button>
-            </div>
-
+            
 
             <?php
 
@@ -113,7 +116,7 @@
             if (mysqli_num_rows($result) > 0) {
                 // Output der query
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<tr>' . '<td>' . $row["SubscriberName"] . "</td>" . '<td>' . $row["DialledNumber"] . "</td>" . '<td>' . $row["CallDuration"] .'<td>' . $row["RingingDuration"] . "</td>" . '<td>' . $row["Time"] . "</td>" . '<td>' . $row["Date"] . "</td>" . '<td>' . $row["CallType"] . "</td>" . '<td>' . $row["Type"] . '</td>' . "</tr>";
+                    echo '<tr>' . '<td>' . $row["SubscriberName"] . "</td>" . '<td>' . $row["DialledNumber"] . "</td>" . '<td>' . $row["CallDuration"] . '<td>' . $row["RingingDuration"] . "</td>" . '<td>' . $row["Time"] . "</td>" . '<td>' . $row["Date"] . "</td>" . '<td>' . $row["CallType"] . "</td>" . '<td>' . $row["Type"] . '</td>' . "</tr>";
                 }
             } else {
                 echo "0 results";
@@ -127,8 +130,11 @@
             // Verbindung zur Datenbacnk schliessen
             $conn->close();
             ?>
-          
+
         </div>
+        
     </main>
+    
 </body>
+
 </html>
