@@ -24,29 +24,31 @@
     <header>
         <nav class="navbar">
             <img src="img/header-bg.svg" alt="Header Background" class="header-bg">
-            <img src="img/espas_logo.svg" alt="espas logo" class="espas_logo">
+            <a href="index.php">
+                <img src="img/espas_logo.svg" alt="espas logo" class="espas_logo">
+            </a>
             <div class="currentDate">
                 <div class="todayDate"></div>
                 <div class="timeNow"></div>
             </div>
         </nav>
-        
+
         <div class="nav-buttons">
-                <select class="buttons btn-lg custom-select" id="customerButton" type="button" aria-haspopup="true"
-                    aria-expanded="false">
-                    <option selected>Select Customer</option>
-                    <?php echo $selectOptions; // Die Optionen aus der Datenbank einfügen ?>
-                </select>
-                <button class="buttons btn-lg" id="startButton">Select starting Date</button>
-                <button class="buttons btn-lg" id="endButton">Select end Date</button>
-            </div>
+            <select class="buttons btn-lg custom-select" id="customerButton" type="button" aria-haspopup="true"
+                aria-expanded="false">
+                <option selected>Select Customer</option>
+                <?php echo $selectOptions; // Die Optionen aus der Datenbank einfügen ?>
+            </select>
+            <button class="buttons btn-lg" id="startButton">Select starting Date</button>
+            <button class="buttons btn-lg" id="endButton">Select end Date</button>
+        </div>
 
     </header>
 
     <main>
-       <?php //include("xml.php"); ?>
+        <?php include("xml.php"); ?>
 
-        <?php /*
+        <?php
         // Verbindung zur MySQL-Datenbank herstellen
         $servername = "localhost";
         $username = "root";
@@ -74,11 +76,11 @@
         }
 
         // Verbindung zur Datenbank schließen
-        $conn->close(); */
+        $conn->close();
         ?>
 
         <div class="content">
-            
+
 
             <?php
 
@@ -91,8 +93,13 @@
             // Verbindung zur MySQL-Datenbank herstellen
             $conn = new mysqli($servername, $username, $password, $dbname);
 
+            // Überprüfen, ob die Verbindung erfolgreich hergestellt wurde
+            if ($conn->connect_error) {
+                die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
+            }
+
             // SQL Query
-            $sql = "SELECT SubscriberName, DialledNumber, RingingDuration, CallDuration, Time, Date, CallType, Type FROM callaccounting WHERE SubscriberName != 'SubscriberName' ORDER BY Date DESC, Time DESC";
+            $sql = "SELECT SubscriberName, DialledNumber, RingingDuration, CallDuration, Time, Date, CallType, Type FROM callaccounting WHERE SubscriberName != 'SubscriberName' ORDER BY Date DESC, Time DESC LIMIT 500";
             $result = $conn->query($sql);
 
             // HTML für eine scrolling Tabelle
@@ -132,9 +139,9 @@
             ?>
 
         </div>
-        
+
     </main>
-    
+
 </body>
 
 </html>

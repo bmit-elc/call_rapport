@@ -21,13 +21,6 @@ if ($conn->query($createDatabaseSQL) === TRUE) {
 // Datenbank auswählen
 $conn->select_db("call_report");
 
-// Tabelle erstellen, wenn sie nicht existiert
-$dropTableSQL = "DROP TABLE IF EXISTS CallAccounting";
-if ($conn->query($dropTableSQL) === TRUE) {
-// echo "Tabelle 'CallAccounting' wurde gelöscht oder existiert nicht.<br>";
-} else {
-    echo "Fehler beim Löschen der Tabelle: " . $conn->error;
-}
 
 $createTableSQL = "CREATE TABLE IF NOT EXISTS CallAccounting (
     id INT AUTO_INCREMENT PRIMARY KEY,
