@@ -1,60 +1,54 @@
 <?php
-    $CallAccountingList = simplexml_load_file("TicketCollector.xml") or die("Error: Cannot create object");
 
-    // Erstellen eines leeren Arrays für die neuen Daten
-    $newDataArray = [];
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "call_report";
 
-    foreach ($CallAccountingList->CallAccounting as $CallAccounting) {
-        $SubscriberName = (string) $CallAccounting->SubscriberName;
-        $DialledNumber = (string) $CallAccounting->DialledNumber;
-        $Date = (string) $CallAccounting->Date;
-        $Time = (string) $CallAccounting->Time;
-        $RingingDuration = (string) $CallAccounting->RingingDuration;
-        $CallDuration = (string) $CallAccounting->CallDuration;
+// Verbindung zur MySQL-Datenbank herstellen
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-        // Prüfen ob incoming oder outgoing
-        $CommunicationType = (string) $CallAccounting->CommunicationType;
+if ($conn->connect_error) {
+    die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
+}
 
-        // Prüfen, ob Call Duration 00:00:00 ist
-        $Type = ($CallDuration == '00:00:00') ? 'verpasst' : 'angenommen';
+$CallAccountingList = simplexml_load_file("TicketCollector.xml") or die("Error: Cannot create object");
 
-        // Bestimme den CallType basierend auf der CommunicationType
-        if (in_array($CommunicationType, ['IncomingPrivate', 'IncomingTransit', 'IncomingTransferPrivate', 'IncomingTransferTransit'])) {
-            $calltype = 'eingehend';
-        } elseif (in_array($CommunicationType, ['OutgoingPrivate', 'OutgoingTransferTransit', 'OutgoingTransferPrivate', 'OutgoingTransit'])) {
-            $calltype = 'ausgehend';
-        } elseif ($CommunicationType == 'BreakIn') {
-            $calltype = 'breakIn';
-        } elseif ($CommunicationType == 'FacilityRequest') {
-            $calltype = 'facilityRequest';
-        } else {
-            $calltype = 'unknown'; // Fallback für unbekannte CommunicationType
-        }
+foreach ($CallAccountingList->CallAccounting as $CallAccounting) {
+    $SubscriberName = $conn->real_escape_string((string) $CallAccounting->SubscriberName);
+    $DialledNumber = $conn->real_escape_string((string) $CallAccounting->DialledNumber);
+    $Date = $conn->real_escape_string((string) $CallAccounting->Date);
+    $Time = $conn->real_escape_string((string) $CallAccounting->Time);
+    $RingingDuration = $conn->real_escape_string((string) $CallAccounting->RingingDuration);
+    $CallDuration = $conn->real_escape_string((string) $CallAccounting->CallDuration);
 
-        // Die neuen Daten in ein assoziatives Array einfügen
-        $newDataArray[] = [
-            'SubscriberName' => $SubscriberName,
-            'DialledNumber' => $DialledNumber,
-            'Date' => $Date,
-            'Time' => $Time,
-            'RingingDuration' => $RingingDuration,
-            'CallDuration' => $CallDuration,
-            'Type' => $Type,
-            'CallType' => $calltype,
-        ];
+    $CommunicationType = $conn->real_escape_string((string) $CallAccounting->CommunicationType);
+    $Type = ($CallDuration == '00:00:00') ? 'verpasst' : 'angenommen';
+
+    // Bestimme den CallType basierend auf der CommunicationType
+    if (in_array($CommunicationType, ['IncomingPrivate', 'IncomingTransit', 'IncomingTransferPrivate', 'IncomingTransferTransit'])) {
+        $calltype = 'eingehend';
+    } elseif (in_array($CommunicationType, ['OutgoingPrivate', 'OutgoingTransferTransit', 'OutgoingTransferPrivate', 'OutgoingTransit'])) {
+        $calltype = 'ausgehend';
+    } elseif ($CommunicationType == 'BreakIn') {
+        $calltype = 'breakIn';
+    } elseif ($CommunicationType == 'FacilityRequest') {
+        $calltype = 'facilityRequest';
+    } else {
+        $calltype = 'unknown'; // Fallback für unbekannte CommunicationType
     }
 
-    // CSV-Datei öffnen und Daten überschreiben
-    $csvFile = fopen("data.csv", "w"); // "w" öffnet die Datei im Schreibmodus (überschreiben)
-    
-    // Neue Daten in die CSV-Datei schreiben
-    fputcsv($csvFile, array_keys($newDataArray[0])); // Schreibe Spaltennamen
-    foreach ($newDataArray as $data) {
-        fputcsv($csvFile, $data);
+    // SQL-Abfrage, um Daten in die Tabelle einzufügen
+    $sql = "INSERT INTO CallAccounting (SubscriberName, DialledNumber, Date, Time, RingingDuration, CallDuration, Type, CallType) VALUES ";
+    $sql .= "('$SubscriberName', '$DialledNumber', '$Date', '$Time', '$RingingDuration', '$CallDuration', '$Type', '$calltype')";
+
+    if ($conn->query($sql) !== TRUE) {
+        echo "Fehler beim Hinzufügen des Datensatzes: " . $conn->error;
     }
+}
 
-    // CSV-Datei schließen
-    fclose($csvFile);
-    ?>
+// Verbindung zur Datenbank schließen
+$conn->close();
 
-    <?php include("database.php"); ?>
+include("database.php");
+?>

@@ -21,7 +21,7 @@
 
 <body>
 
-    <header>
+    <header class="header-bg">
         <?php include("xml.php"); ?>
 
         <?php
@@ -41,6 +41,9 @@
         // SQL-Abfrage, um alle eindeutigen SubscriberName-Werte abzurufen
         $sql = "SELECT DISTINCT SubscriberName FROM callaccounting WHERE SubscriberName != 'SubscriberName' AND TRIM(SubscriberName) != '' ORDER BY SubscriberName ASC ";
         $result = $conn->query($sql);
+        if (!$result) {
+            die("Fehler bei der Abfrage: " . $conn->error);
+        }
 
         // HTML-Optionen für den Select-Button erstellen
         $selectOptions = "";
@@ -56,7 +59,6 @@
         ?>
 
         <nav class="navbar">
-            <img src="img/header-bg.svg" alt="Header Background" class="header-bg">
             <a href="index.php">
                 <img src="img/espas_logo.svg" alt="espas logo" class="espas_logo">
             </a>
@@ -80,60 +82,60 @@
     <main>
         <div class="content">
 
-            <?php
+            <?php /*
 
-            // Daten für die infinite_scroll Liste auslesen
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "call_report";
+  // Daten für die infinite_scroll Liste auslesen
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $dbname = "call_report";
 
-            // Verbindung zur MySQL-Datenbank herstellen
-            $conn = new mysqli($servername, $username, $password, $dbname);
+  // Verbindung zur MySQL-Datenbank herstellen
+  $conn = new mysqli($servername, $username, $password, $dbname);
 
-            // Überprüfen, ob die Verbindung erfolgreich hergestellt wurde
-            if ($conn->connect_error) {
-                die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
-            }
+  // Überprüfen, ob die Verbindung erfolgreich hergestellt wurde
+  if ($conn->connect_error) {
+      die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
+  }
 
-            // SQL Query
-            $sql = "SELECT SubscriberName, DialledNumber, RingingDuration, CallDuration, Time, Date, CallType, Type FROM callaccounting WHERE SubscriberName != 'SubscriberName' ORDER BY Date DESC, Time DESC LIMIT 1000";
-            $result = $conn->query($sql);
+  // SQL Query
+  $sql = "SELECT SubscriberName, DialledNumber, RingingDuration, CallDuration, Time, Date, CallType, Type FROM callaccounting WHERE SubscriberName != 'SubscriberName' ORDER BY Date DESC, Time DESC LIMIT 1000";
+  $result = $conn->query($sql);
 
-            // HTML für eine scrolling Tabelle
-            echo '<div class="scrolling-list">';
-            echo '<div class="infinite_scrolling_list_container">';
-            echo '<table class="table">';
-            echo '<thead>';
-            echo '<tr>';
-            echo '<th scope="col">Name</th>';
-            echo '<th scope="col">Nummer</th>';
-            echo '<th scope="col">Anrufdauer</th>';
-            echo '<th scope="col">Klingeldauer</th>';
-            echo '<th scope="col">Uhrzeit</th>';
-            echo '<th scope="col">Datum</th>';
-            echo '<th scope="col">Anruf</th>';
-            echo '<th scope="col">Typ</th>';
-            echo '</tr>';
-            echo '</thead>';
-            echo '<tbody">';
+  // HTML für eine scrolling Tabelle
+  echo '<div class="scrolling-list">';
+  echo '<div class="infinite_scrolling_list_container">';
+  echo '<table class="table">';
+  echo '<thead>';
+  echo '<tr>';
+  echo '<th scope="col">Name</th>';
+  echo '<th scope="col">Nummer</th>';
+  echo '<th scope="col">Anrufdauer</th>';
+  echo '<th scope="col">Klingeldauer</th>';
+  echo '<th scope="col">Uhrzeit</th>';
+  echo '<th scope="col">Datum</th>';
+  echo '<th scope="col">Anruf</th>';
+  echo '<th scope="col">Typ</th>';
+  echo '</tr>';
+  echo '</thead>';
+  echo '<tbody">';
 
-            if (mysqli_num_rows($result) > 0) {
-                // Output der query
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<tr>' . '<td>' . $row["SubscriberName"] . "</td>" . '<td>' . $row["DialledNumber"] . "</td>" . '<td>' . $row["CallDuration"] . '<td>' . $row["RingingDuration"] . "</td>" . '<td>' . $row["Time"] . "</td>" . '<td>' . $row["Date"] . "</td>" . '<td>' . $row["CallType"] . "</td>" . '<td>' . $row["Type"] . '</td>' . "</tr>";
-                }
-            } else {
-                echo "0 results";
-            }
+  if (mysqli_num_rows($result) > 0) {
+      // Output der query
+      while ($row = mysqli_fetch_assoc($result)) {
+          echo '<tr>' . '<td>' . $row["SubscriberName"] . "</td>" . '<td>' . $row["DialledNumber"] . "</td>" . '<td>' . $row["CallDuration"] . '<td>' . $row["RingingDuration"] . "</td>" . '<td>' . $row["Time"] . "</td>" . '<td>' . $row["Date"] . "</td>" . '<td>' . $row["CallType"] . "</td>" . '<td>' . $row["Type"] . '</td>' . "</tr>";
+      }
+  } else {
+      echo "0 results";
+  }
 
-            echo '</tbody>';
-            echo '</table>';
-            echo '</div>';
-            echo '</div>';
+  echo '</tbody>';
+  echo '</table>';
+  echo '</div>';
+  echo '</div>';
 
-            // Verbindung zur Datenbacnk schliessen
-            $conn->close();
+  // Verbindung zur Datenbacnk schliessen
+  $conn->close(); */
             ?>
 
         </div>
