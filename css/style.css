@@ -6,7 +6,7 @@
 body {
     background-color: #ffff !important;
     margin: 0;
-    font-family: 'frutiger', Arial, Helvetica, sans-serif !important;
+    font-family: 'frutiger', sans-serif, Helvetica, sans-serif !important;
 }
 
 header{
@@ -15,8 +15,7 @@ header{
 
 .navbar {
     color: #FFFF;
-    background-color: #e66446;
-    background-repeat: no-repeat;
+  
     height: 5rem;
     font-size: 1.2rem;
     flex-direction: row-reverse;
@@ -25,7 +24,10 @@ header{
 }
 
 .header-bg {
-    position: absolute;
+    background-image: url(../img/header-bg.svg) !important; 
+    background-color: #e66446;
+    background-repeat: no-repeat;
+    position: relative;
     width: 100%;
     z-index: -1;
 }
