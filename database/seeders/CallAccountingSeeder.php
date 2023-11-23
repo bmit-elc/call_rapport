@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class CallAccountingSeeder extends Seeder
 {
@@ -27,6 +29,6 @@ class CallAccountingSeeder extends Seeder
         ];
 
         // Daten in die Tabelle einfügen
-        DB::table('deine_tabellenname')->insert($data);
+        DB::table('callaccounting')->insert($data);
     }
 }
