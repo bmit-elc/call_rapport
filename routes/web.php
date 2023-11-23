@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route mit einem Controller und einer Methode
+Route::get('/zeige-benutzer', [DeinController::class, 'zeigeBenutzer']);
+
+// Weitere Routen hier definieren...

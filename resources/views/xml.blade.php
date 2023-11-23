@@ -1,4 +1,4 @@
-<?php
+@php
 
 $servername = "localhost";
 $username = "root";
@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
 }
 
-$CallAccountingList = simplexml_load_file("TicketCollector.xml") or die("Error: Cannot create object");
+$CallAccountingList = simplexml_load_file(public_path("TicketCollector.xml")) or die("Error: Cannot create object");
 
 foreach ($CallAccountingList->CallAccounting as $CallAccounting) {
     $SubscriberName = $conn->real_escape_string((string) $CallAccounting->SubscriberName);
@@ -51,4 +51,4 @@ foreach ($CallAccountingList->CallAccounting as $CallAccounting) {
 $conn->close();
 
 include("database.php");
-?>
+@endphp
