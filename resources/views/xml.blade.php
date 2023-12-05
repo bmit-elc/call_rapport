@@ -1,4 +1,4 @@
-@php
+<?php
 
 $servername = "localhost";
 $username = "root";
@@ -11,6 +11,9 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
 }
+
+// Transaktion beginnen
+$conn->begin_transaction();
 
 $CallAccountingList = simplexml_load_file(public_path("TicketCollector.xml")) or die("Error: Cannot create object");
 
@@ -47,8 +50,12 @@ foreach ($CallAccountingList->CallAccounting as $CallAccounting) {
     }
 }
 
+
+// Transaktion abschließen (Commit) nach dem foreach-Loop
+$conn->commit();
+
 // Verbindung zur Datenbank schließen
 $conn->close();
 
-include("database.php");
-@endphp
+return view('database');
+?>

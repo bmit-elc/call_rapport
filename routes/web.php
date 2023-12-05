@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Route;
+use App\Models\CallAccounting;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route mit einem Controller und einer Methode
-Route::get('/zeige-benutzer', [DeinController::class, 'zeigeBenutzer']);
+Route::get('/daten-anzeigen', function () {
+    $daten = CallAccounting::all();
+    return view('welcome', ['daten' => $daten]);
+});
 
 // Weitere Routen hier definieren...
