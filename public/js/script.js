@@ -25,6 +25,14 @@ function updateDateTime() {
   const formattedDate = now.toLocaleDateString('de-DE', optionsDate);
   const formattedTime = now.toLocaleTimeString('de-DE', optionsTime);
 
+  if (todayDateElement !== null){
+    Element.textContent = 'your text content';
+  } else {
+    console.error('Element not found')
+  }
+
+  console.log(formattedDate);
+
   todayDateElement.textContent = formattedDate;
   timeNowElement.textContent = formattedTime;
 }

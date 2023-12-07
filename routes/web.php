@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\myController;
 use App\Models\CallAccounting;
 
 /*
@@ -13,13 +14,12 @@ use App\Models\CallAccounting;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/daten-anzeigen', function () {
-    $daten = CallAccounting::all();
-    return view('welcome', ['daten' => $daten]);
-});
 
+// Route::get('/daten-anzeigen', function () {
+//     $daten = CallAccounting::all();
+//     return view('welcome', ['daten' => $daten]);
+// });
+
+Route::get('/', myController::class.'@index') ->name('daten.welcome');
 // Weitere Routen hier definieren...

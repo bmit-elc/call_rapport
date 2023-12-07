@@ -21,8 +21,10 @@
 
 <body>
     <header class="header-bg">
-        <?php return view ('xml'); ?>
-
+        @include('xml')
+        <script>
+            console.log('Hello from Blade!');
+        </script>
         <?php
             // Verbindung zur MySQL-Datenbank herstellen
             $servername = 'localhost';
@@ -71,24 +73,43 @@
             <select class="buttons btn-lg custom-select" id="customerButton" type="button" aria-haspopup="true"
                 aria-expanded="false">
                 <option selected>Select Customer</option>
-                @php echo $selectOptions; // Die Optionen aus der Datenbank einfügen @endphp
+                @php echo $selectOptions;  @endphp
             </select>
             <button class="buttons btn-lg" id="startButton">Select starting Date</button>
             <button class="buttons btn-lg" id="endButton">Select end Date</button>
         </div>
 
-        // Weitere Felder hier einfügen...
+        
+        <table>
+    <thead>
+        <tr>
+            <th>SubscriberName</th>
+            <th>DialledNumber</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>RingingDuration</th>
+            <th>CallDuration</th>
+            <th>Type</th>
+            <th>CallType</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(count($daten)> 0)
         @foreach ($daten as $datensatz)
-            <p>SubscriberName: {{ $datensatz->SubscriberName }}</p>
-            <p>DialledNumber: {{ $datensatz->DialledNumber }}</p>
-            <p>Date: {{ $datensatz->Date }}</p>
-            <p>Time: {{ $datensatz->Time }}</p>
-            <p>RingingDuration: {{ $datensatz->RingingDuration }}</p>
-            <p>CallDuration: {{ $datensatz->CallDuration }}</p>
-            <p>Type: {{ $datensatz->Type }}</p>
-            <p>CallType: {{ $datensatz->CallType }}</p>
+            <tr>
+                <td>{{ $datensatz->SubscriberName }}</td>
+                <td>{{ $datensatz->DialledNumber }}</td>
+                <td>{{ $datensatz->Date }}</td>
+                <td>{{ $datensatz->Time }}</td>
+                <td>{{ $datensatz->RingingDuration }}</td>
+                <td>{{ $datensatz->CallDuration }}</td>
+                <td>{{ $datensatz->Type }}</td>
+                <td>{{ $datensatz->CallType }}</td>
+            </tr>
         @endforeach
-
+        @endif
+    </tbody>
+</table>
 
     </header>
 
