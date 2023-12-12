@@ -110,7 +110,9 @@
         @endif
     </tbody>
 </table>
-
+<div class="pagination-container">
+    {{$daten->links()}}
+</div>
     </header>
 
     @yield('content')

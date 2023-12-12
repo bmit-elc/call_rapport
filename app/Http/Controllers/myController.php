@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CallAccounting;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -18,7 +19,10 @@ class myController extends BaseController
     public function index()
     {
         // Read - Display a list of tasks
-        $daten = CallAccounting::paginate(10);
-        return view('welcome', compact('daten'));
+        // $daten = CallAccounting::paginate(10);
+        // return view('welcome', compact('daten'));
+        return view('welcome', [
+            'daten' => DB::table('CallAccounting')->orderBy('Date')->cursorPaginate(10)
+        ]);
     }
 }
