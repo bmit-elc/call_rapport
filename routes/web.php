@@ -22,4 +22,4 @@ use App\Models\CallAccounting;
 // });
 
 Route::get('/', myController::class.'@index') ->name('daten.welcome');
-// Weitere Routen hier definieren...
+// Weitere Routen hier definieren...php
