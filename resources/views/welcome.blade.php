@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Call Report - ESPAS</title>
     <link type="text/css" media="screen" rel='stylesheet' href="{{ asset('css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="{{ asset('js/script.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -16,6 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
+
     <link href="img/favicon-32x32.png" rel="icon">
 </head>
 
@@ -25,39 +27,6 @@
         <script>
             console.log('Hello from Blade!');
         </script>
-        <?php
-            // Verbindung zur MySQL-Datenbank herstellen
-            $servername = 'localhost';
-            $username = 'root';
-            $password = '';
-            $dbname = 'call_report';
-
-            $conn = new mysqli($servername, $username, $password, $dbname);
-
-            // Überprüfen, ob die Verbindung erfolgreich hergestellt wurde
-            if ($conn->connect_error) {
-                die('Verbindung zur Datenbank fehlgeschlagen: ' . $conn->connect_error);
-            }
-
-            // SQL-Abfrage, um alle eindeutigen SubscriberName-Werte abzurufen
-            $sql = "SELECT DISTINCT SubscriberName FROM callaccounting WHERE SubscriberName != 'SubscriberName' AND TRIM(SubscriberName) != '' ORDER BY SubscriberName ASC ";
-            $result = $conn->query($sql);
-            if (!$result) {
-                die('Fehler bei der Abfrage: ' . $conn->error);
-            }
-
-            // HTML-Optionen für den Select-Button erstellen
-            $selectOptions = '';
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $subscriberName = $row['SubscriberName'];
-                    $selectOptions .= "<option value='$subscriberName'>$subscriberName</option>";
-                }
-            }
-
-            // Verbindung zur Datenbank schließen
-            $conn->close();
-        ?>
 
         <nav class="navbar">
             <a href="index.php">
@@ -70,16 +39,17 @@
         </nav>
 
         <div class="nav-buttons">
-            <select class="buttons btn-lg custom-select" id="customerButton" type="button" aria-haspopup="true"
-                aria-expanded="false">
-                <option selected>Select Customer</option>
-                @php echo $selectOptions;  @endphp
-            </select>
+            {!! Form::open() !!}
+            {!! Form::select('customer', ['default' => 'Select Customer'] + $customerOptions, $selectedSubscriber, [
+                'id' => 'customerButton',
+                'class' => 'buttons btn-lg custom-select',
+            ]) !!}
+
+            {!! Form::close() !!}
             <button class="buttons btn-lg" id="startButton">Select starting Date</button>
             <button class="buttons btn-lg" id="endButton">Select end Date</button>
         </div>
-
-        
+    </header>
         <table>
     <thead>
         <tr>
@@ -113,10 +83,11 @@
 <div class="pagination-container">
     {{$daten->links()}}
 </div>
-    </header>
+   
 
     @yield('content')
 
+   
 </body>
 
 </html>

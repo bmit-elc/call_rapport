@@ -25,11 +25,12 @@ function updateDateTime() {
   const formattedDate = now.toLocaleDateString('de-DE', optionsDate);
   const formattedTime = now.toLocaleTimeString('de-DE', optionsTime);
 
-  if (todayDateElement !== null){
-    Element.textContent = 'your text content';
+  if (todayDateElement !== null) {
+    todayDateElement.textContent = formattedDate;
   } else {
     console.error('Element not found')
   }
+
 
   console.log(formattedDate);
 
@@ -42,3 +43,27 @@ setInterval(updateDateTime, 1000);
 
 // Initial das Datum und die Uhrzeit anzeigen
 updateDateTime();
+
+
+//////////////////////Buttons//////////////////////////////////////////
+
+const customerButton = document.getElementById('customerButton');
+
+// Event listener for the button
+document.addEventListener('DOMContentLoaded', function () {
+  const customerButton = document.getElementById('customerButton');
+
+  // Überprüfe, ob das Element gefunden wurde, bevor ein Event-Listener hinzugefügt wird
+  if (customerButton) {
+    // Event listener for the button
+    customerButton.addEventListener('change', function () {
+      // Use the selected value here
+      const selectedCustomer = customerButton.value;
+      console.log('Selected Customer:', selectedCustomer);
+
+      // Du kannst hier zusätzliche Aktionen durchführen, z.B. eine Anfrage an den Server senden, um Daten für den ausgewählten Kunden abzurufen und die Tabelle zu aktualisieren.
+    });
+  } else {
+    console.error('Element with ID "customerButton" not found.');
+  }
+});
