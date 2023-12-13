@@ -49,43 +49,45 @@
             <button class="buttons btn-lg" id="startButton">Select starting Date</button>
             <button class="buttons btn-lg" id="endButton">Select end Date</button>
         </div>
-
     </header>
+        <table>
+    <thead>
+        <tr>
+            <th>SubscriberName</th>
+            <th>DialledNumber</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>RingingDuration</th>
+            <th>CallDuration</th>
+            <th>Type</th>
+            <th>CallType</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(count($daten)> 0)
+        @foreach ($daten as $datensatz)
+            <tr>
+                <td>{{ $datensatz->SubscriberName }}</td>
+                <td>{{ $datensatz->DialledNumber }}</td>
+                <td>{{ $datensatz->Date }}</td>
+                <td>{{ $datensatz->Time }}</td>
+                <td>{{ $datensatz->RingingDuration }}</td>
+                <td>{{ $datensatz->CallDuration }}</td>
+                <td>{{ $datensatz->Type }}</td>
+                <td>{{ $datensatz->CallType }}</td>
+            </tr>
+        @endforeach
+        @endif
+    </tbody>
+</table>
+<div class="pagination-container">
+    {{$daten->links()}}
+</div>
+   
 
     @yield('content')
 
-    <table>
-        <thead>
-            <tr>
-                <th>SubscriberName</th>
-                <th>DialledNumber</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>RingingDuration</th>
-                <th>CallDuration</th>
-                <th>Type</th>
-                <th>CallType</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (count($daten) > 0)
-                @foreach ($daten as $datensatz)
-                    <tr>
-                        <td>{{ $datensatz->SubscriberName }}</td>
-                        <td>{{ $datensatz->DialledNumber }}</td>
-                        <td>{{ $datensatz->Date }}</td>
-                        <td>{{ $datensatz->Time }}</td>
-                        <td>{{ $datensatz->RingingDuration }}</td>
-                        <td>{{ $datensatz->CallDuration }}</td>
-                        <td>{{ $datensatz->Type }}</td>
-                        <td>{{ $datensatz->CallType }}</td>
-                    </tr>
-                @endforeach
-            @endif
-        </tbody>
-    </table>
-
-
+   
 </body>
 
 </html>

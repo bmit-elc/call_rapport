@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CallAccounting;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -14,6 +15,7 @@ class myController extends BaseController
 
     public function index()
     {
+
         // Subscriber-Namen aus der Datenbank abrufen
         $subscriberNames = CallAccounting::select('SubscriberName')
             ->distinct()
@@ -29,11 +31,19 @@ class myController extends BaseController
         }
     
         $selectedSubscriber = 'default'; // Set the default selected value, you can change this as needed
-    
+      
+      
+     // Read - Display a list of tasks
+        // $daten = CallAccounting::paginate(10);
+        // return view('welcome', compact('daten'));
         // Daten für die Tabelle abrufen
         $daten = CallAccounting::paginate(10);
     
         return view('welcome', compact('daten', 'customerOptions', 'selectedSubscriber'));
+       
+      //  return view('welcome', [
+        //    'daten' => DB::table('CallAccounting')->orderBy('Date')->cursorPaginate(10)
+       // ]);
     }
     
     
