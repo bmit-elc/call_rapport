@@ -10,7 +10,7 @@ body {
 }
 
 header{
-    margin-bottom: 5rem;
+    padding-bottom: 1vw;
 }
 
 .navbar {
@@ -46,7 +46,7 @@ header{
 }
 
 .nav-buttons {
-    margin: 0.5rem 0rem 1rem 1rem;;
+    margin: 1rem 0rem 0rem 1rem;;
     display: flex;
     flex-direction: row;
 }
