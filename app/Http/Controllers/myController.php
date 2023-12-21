@@ -36,15 +36,11 @@ class myController extends BaseController
      // Read - Display a list of tasks
         // $daten = CallAccounting::paginate(10);
         // return view('welcome', compact('daten'));
-        // Daten für die Tabelle abrufen
-        $daten = CallAccounting::paginate(10);
-    
-        return view('welcome', compact('daten', 'customerOptions', 'selectedSubscriber'));
-       
-      //  return view('welcome', [
-        //    'daten' => DB::table('CallAccounting')->orderBy('Date')->cursorPaginate(10)
-       // ]);
+
+        return view('welcome', [
+            'daten' => DB::table('CallAccounting')->orderBy('Date')->cursorPaginate(10)
+        ]);       
     }
-    
-    
+   
+
 }

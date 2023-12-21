@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\breakinChartController;
 use App\Http\Controllers\myController;
 use App\Models\CallAccounting;
 
@@ -23,4 +25,6 @@ use App\Models\CallAccounting;
 
 Route::get('/', myController::class.'@index') ->name('daten.welcome');
 
-// Weitere Routen hier definieren...
+Route::get('/chart', [breakinChartController::class, 'indexChart']) ->name('chart.indexChart');
+// Weitere Routen hier definieren...php
+
