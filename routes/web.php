@@ -24,5 +24,7 @@ use App\Models\CallAccounting;
 // });
 
 Route::get('/', myController::class.'@index') ->name('daten.welcome');
+
 Route::get('/chart', [breakinChartController::class, 'indexChart']) ->name('chart.indexChart');
 // Weitere Routen hier definieren...php
+
