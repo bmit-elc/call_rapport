@@ -38,7 +38,9 @@ class myController extends BaseController
         // return view('welcome', compact('daten'));
 
         return view('welcome', [
-            'daten' => DB::table('CallAccounting')->orderBy('Date')->cursorPaginate(10)
+            'daten' => DB::table('CallAccounting')->orderBy('Date')->cursorPaginate(10),
+            'customerOptions' => $customerOptions,
+            'selectedSubscriber' => $selectedSubscriber,
         ]);       
     }
    
